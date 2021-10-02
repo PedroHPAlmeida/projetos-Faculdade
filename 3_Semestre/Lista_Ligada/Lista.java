@@ -26,6 +26,41 @@ public class Lista {
         this.setPrimeiro(novo);
     }
 
+    public void insereFim(int i) {
+        No novo = new No(i);
+        if (this.estaVazia()) {
+            this.setPrimeiro(novo);
+        } else {
+            No aux = this.getPrimeiro();
+            while (aux.getProximo() != null) {
+                aux = aux.getProximo();
+            }
+            aux.setProximo(novo);
+        }
+    }
+
+    public int removeInicio() {
+        int i = this.getPrimeiro().getInfo();
+        this.setPrimeiro(this.getPrimeiro().getProximo());
+        return i;
+    }
+
+    public int removeFim() {
+        int i;
+        if (this.getPrimeiro().getProximo() == null) { // lista tem apenas 1 elemento
+            i = this.getPrimeiro().getInfo();
+            this.setPrimeiro(null); // esvaziei a lista
+        } else {
+            No aux = this.getPrimeiro();
+            while (aux.getProximo().getProximo() != null) {
+                aux = aux.getProximo();
+            }
+            i = aux.getProximo().getInfo();
+            aux.setProximo(null);
+        }
+        return i;
+    }
+
     @Override
     public String toString() {
         String s = "Lista: ";
